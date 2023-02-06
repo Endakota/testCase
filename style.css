@@ -1,0 +1,54 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.main{
+    display: flex;
+}
+#table{
+    width: 50%;
+    border: 1px solid black;
+}
+.colname{
+    font-weight: bold;
+    border: 1px solid black;
+    text-align: center;
+}
+.textOverflow{
+    overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 2; /* number of lines to show */
+           line-clamp: 2; 
+   -webkit-box-orient: vertical;
+}
+.tcol{
+    border: 1px solid black;
+    text-align: center;
+}
+.modalWindow{
+    width: 50%;
+    height: 50%;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.btns{
+    display: flex;
+    justify-content: flex-end;
+}
+.btns > button{
+    width: 80px;
+    height: 50px;
+    font-size: 20px;
+    border: 1px solid black;
+}
+.btns > button:first-child{
+    background-color: aqua;
+}
+.btns > button:last-child{
+    background-color: red;
+    color: white;
+}
