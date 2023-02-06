@@ -1,6 +1,10 @@
 window.addEventListener("load", ()=>{
+    
     fillTable(data)
 })
+function pagination(data){
+    
+}
 function sortTable(data, colname, reverse = 1, isName = false){// reverse is for reverse sorting 
     // if reverse == 1 -> it will sort alphabetical
     // reverse == -1 -> reverse alphabetical 
@@ -55,6 +59,14 @@ function fillTable(data){
                 sortTable(data, "lastName",reverse,true)
             }
         })  
+        td.addEventListener("contextmenu", (e)=>{
+            e.preventDefault()
+            let cellIndex = Array.from(e.target.parentNode.children).indexOf(td)
+            for(let i = 0; i < table.children.length-1; i++){
+                table.children[i+1].children[cellIndex].classList.toggle("hidden")
+            }
+        })
+
         tr.appendChild(td)
     }
     table.appendChild(tr)
@@ -74,13 +86,21 @@ function fillTable(data){
         for(let part of filterData){
             let td = document.createElement("td")
             td.classList.add("tcol") 
-            td.innerText = elem[part]
+            
             if(part == "about"){
                 td.classList.add("textOverflow") // for showing only 2 max lines
+                td.innerText = elem[part]
             }else{
-                td.style.backgroundColor = elem[part]
+                let div = document.createElement("div")
+                div.innerText = elem[part]
+                div.style.backgroundColor = elem[part]
                 td.style.color = "rgba(0,0,0,0)"
-                td.style.borderRadius = "50%"
+                div.style.width = "30px";
+                div.style.height = "30px"
+                div.style.borderRadius = "50%"
+                div.style.margin = "0 auto"
+                td.appendChild(div)
+                td.classList.add("eyeColor")
             }
             tr.appendChild(td)
         }//filling other needed data of people

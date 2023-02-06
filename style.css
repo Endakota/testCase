@@ -8,12 +8,12 @@
 }
 #table{
     width: 50%;
-    border: 1px solid black;
+
 }
 .colname{
     font-weight: bold;
     border: 1px solid black;
-    text-align: center;
+    /* text-align: center; */
 }
 .textOverflow{
     overflow: hidden;
@@ -25,7 +25,7 @@
 }
 .tcol{
     border: 1px solid black;
-    text-align: center;
+    /* text-align: center; */
 }
 .modalWindow{
     width: 50%;
@@ -51,4 +51,13 @@
 .btns > button:last-child{
     background-color: red;
     color: white;
+}
+.hidden{
+    visibility: hidden;
+    width: 1px;
+}
+.eyeColor{
+    display: flexbox;
+    align-items: center;
+    align-content: center;
 }
