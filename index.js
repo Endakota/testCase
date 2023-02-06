@@ -1,9 +1,22 @@
 window.addEventListener("load", ()=>{
-    
-    fillTable(data)
+/* doing the script after windowl loads */
+    let buttons = document.getElementsByClassName("button")
+    /* for first side task to pagination */ 
+    for(let btn of buttons){
+        btn.addEventListener("click",()=>{
+            if(btn.innerText == "All"){
+                /*showing all data stored*/
+                fillTable(data)
+            }else{
+                pagination(data, parseInt(btn.innerText))
+            }
+        })
+    } /* first load of data */ 
+    pagination(data)
 })
-function pagination(data){
-    
+function pagination(data, pageNum = 1){
+    /* just slicing data */
+    fillTable(data.slice(10*pageNum - 10 ,10*pageNum))
 }
 function sortTable(data, colname, reverse = 1, isName = false){// reverse is for reverse sorting 
     // if reverse == 1 -> it will sort alphabetical
@@ -75,8 +88,8 @@ function fillTable(data){
     let filterData = ["about", "eyeColor"]
     for(let elem of data){ 
         let tr = document.createElement("tr")
-        tr.classList.add("trow")
-        for(let name of fullName){
+        tr.classList.add("trow") // creating №(data.length) of rows
+        for(let name of fullName){ // and pushing the data to td
             let td = document.createElement("td")
             td.classList.add("tcol")
             td.innerText = elem["name"][name]
@@ -91,6 +104,7 @@ function fillTable(data){
                 td.classList.add("textOverflow") // for showing only 2 max lines
                 td.innerText = elem[part]
             }else{
+                /* third side task */
                 let div = document.createElement("div")
                 div.innerText = elem[part]
                 div.style.backgroundColor = elem[part]
@@ -108,7 +122,7 @@ function fillTable(data){
     }
 
     let tcols = document.getElementsByClassName("tcol")
-
+    /* for creating modal window to change the data */ 
     for(let td of tcols){
 
         td.addEventListener("click", ()=>{
@@ -131,6 +145,7 @@ function modal(tr,colnames,data){
     let names = ["firstName", "lastName","about", "eyeColor"]
     let otherData = []
     let col = 0
+    /* decided to show data to be changed in textarea */
     for(let td of tr.children){
         let p = document.createElement("p")
         p.innerText = colnames[col]
@@ -147,12 +162,13 @@ function modal(tr,colnames,data){
     let btns = ["Save", "Cancel"]
     let buttonDiv = document.createElement("div")
 
-    let rowIndex = Array.from(document.getElementsByClassName("trow")).indexOf(tr)
+    let rowIndex = Array.from(document.getElementsByClassName("trow")).indexOf(tr) /* getting rowIndex of clicked cell */
     for(let btn of btns){
         let button = document.createElement("button")
         button.innerText = btn
         
         button.addEventListener("click", ()=>{
+            /* submitting the changes */
             if(btn[0] == "S"){
                 let textareas = textDiv.getElementsByTagName("textarea")
                 for(let index = 0; index < textareas.length; index++){
@@ -165,6 +181,7 @@ function modal(tr,colnames,data){
                 }
                 fillTable(dataCopy)
                 main.removeChild(div)
+                /* closing the modalWindow */
             }if(btn[0] == "C"){
                 main.removeChild(div)
             }
@@ -176,5 +193,6 @@ function modal(tr,colnames,data){
     div.classList.add("modalWindow")
     main.appendChild(div)
     
-    return dataCopy
+    return dataCopy /* saves the data */
+    /* but REMEMBER the changes will lost after reloading the window */
 }
